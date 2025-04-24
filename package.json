@@ -2,6 +2,7 @@
   "name": "chessmate",
   "main": "expo-router/entry",
   "version": "1.0.0",
+  "homepage": "https://lorinpet.github.io/chessmate_web",
   "scripts": {
     "start": "expo start",
     "reset-project": "node ./scripts/reset-project.js",
@@ -9,7 +10,9 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "test": "jest --watchAll",
-    "lint": "expo lint"
+    "lint": "expo lint",
+    "predeploy": "expo export --platform web",
+    "deploy": "gh-pages -d dist"
   },
   "jest": {
     "preset": "jest-expo"
