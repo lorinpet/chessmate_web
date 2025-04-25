@@ -30,7 +30,7 @@ const ResetPasswordScreen = () => {
 
         response.json().then((code) => {
             if (code.code === '0') {
-                router.push('/dashboard');
+                router.push('dashboard');
             }
         });
     }
@@ -159,7 +159,7 @@ const ResetPasswordScreen = () => {
                     {serverCode === '1' ? 'Invalid code.' : (serverCode === '2' ? 'Invalid email.' : (serverCode === '3' ? 'Invalid or expired code.' : 'Unknown error.'))}
                 </Text>}
 
-                <Link href="/login" style={styles.linkText}>
+                <Link href="login" style={styles.linkText}>
                     <Text style={styles.linkText}>Back to Login</Text>
                 </Link>
             </View>

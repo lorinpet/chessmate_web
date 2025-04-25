@@ -32,7 +32,7 @@ const SettingsScreen = () => {
 
     response.json().then((code) => {
       if (code.code === '1') {
-        router.push('/login');
+        router.push('login');
       }
     });
   }
@@ -123,7 +123,7 @@ const SettingsScreen = () => {
   return (
     <ScrollView style={styles.container}>
       <View style={styles.header}>
-        <Link href="/profile">
+        <Link href="profile">
           <View>
             <Ionicons name="arrow-back" size={24} color="#ccc" />
           </View>
@@ -131,7 +131,7 @@ const SettingsScreen = () => {
 
         <Text style={styles.headerText}>Settings</Text>
 
-        <Link href="/dashboard">
+        <Link href="dashboard">
           <View>
             <Ionicons name="menu" size={24} color="#ccc" />
           </View>

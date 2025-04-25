@@ -12,7 +12,7 @@
     "test": "jest --watchAll",
     "lint": "expo lint",
     "web:build": "expo export --platform web",
-    "postweb:build": "cp dist/index.html dist/404.html",
+    "postweb:build": "cp +not-found.html dist/404.html",
     "deploy": "gh-pages -d dist"
   },
   "jest": {

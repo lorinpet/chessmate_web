@@ -580,7 +580,7 @@ const GameScreen: React.FC = () => {
 
     response.json().then((code) => {
       if (code.code === '1') {
-        router.push('/login');
+        router.push('login');
       }
     });
   }
@@ -789,7 +789,7 @@ const GameScreen: React.FC = () => {
       <View style={[styles.container, { minHeight: height }]}>
         <View style={styles.topBar}>
           <View style={styles.backArrow}>
-            <Link href="/dashboard">
+            <Link href="dashboard">
               <View>
                 <MaterialIcons name="arrow-back" size={responsiveFontSize(30)} color="#ccc" />
               </View>

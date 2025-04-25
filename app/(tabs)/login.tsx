@@ -28,7 +28,7 @@ const LoginScreen = () => {
 
         response.json().then((code) => {
             if (code.code === '0') {
-                router.push('/dashboard');
+                router.push('dashboard');
             }
         });
     }
@@ -74,7 +74,7 @@ const LoginScreen = () => {
             if (response.ok) {
                 const data = await response.json();
                 await AsyncStorage.setItem('token', data.message);
-                router.push('/dashboard');
+                router.push('dashboard');
             } else {
                 const error = await response.json();
                 setServerCode(error.error);
@@ -125,11 +125,11 @@ const LoginScreen = () => {
                     {serverCode === '1' ? 'Account not confirmed by email yet.' : (serverCode === '2' ? 'Wrong password.' : (serverCode === '3' ? 'User doesn\'t exist.' : 'Unknown error.'))}
                 </Text>}
 
-                <Link href="/forgot" style={styles.linkText}>
+                <Link href="forgot" style={styles.linkText}>
                     <Text style={styles.linkText}>Forgot password?</Text>
                 </Link>
 
-                <Link href="/register" style={styles.linkText}>
+                <Link href="register" style={styles.linkText}>
                     <Text style={styles.linkText}>Don't have an account yet? Register.</Text>
                 </Link>
             </View>

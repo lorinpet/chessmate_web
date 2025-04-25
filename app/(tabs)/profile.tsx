@@ -41,7 +41,7 @@ const ProfileScreen = () => {
 
     response.json().then((code) => {
       if (code.code === '1') {
-        router.push('/login');
+        router.push('login');
       }
     });
   }
@@ -116,7 +116,7 @@ const ProfileScreen = () => {
   }
 
   const spectateGame = (gameId: string) => {
-    router.push(`/archive?archive=${gameId}`);
+    router.push(`archive?archive=${gameId}`);
   };
 
   // Dropdown item values
@@ -130,7 +130,7 @@ const ProfileScreen = () => {
   return (
     <ScrollView style={styles.container}>
       <View style={styles.header}>
-        <Link href="/dashboard">
+        <Link href="dashboard">
           <View>
             <Ionicons name="arrow-back" size={24} color="#ccc" />
           </View>
@@ -138,7 +138,7 @@ const ProfileScreen = () => {
 
         <Text style={styles.headerText}>Profile</Text>
 
-        <Link href="/settings">
+        <Link href="settings">
           <View>
             <Ionicons name="settings" size={24} color="#ccc" />
           </View>

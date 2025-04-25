@@ -38,7 +38,7 @@ const DashboardScreen = () => {
 
     response.json().then((code) => {
       if (code.code === '1') {
-        router.push('/login');
+        router.push('login');
       }
     });
   }
@@ -51,7 +51,7 @@ const DashboardScreen = () => {
 
   const logoff = async () => {
     await AsyncStorage.setItem('token', '');
-    router.push('/login');
+    router.push('login');
   }
 
   const fetchData = async () => {
@@ -95,7 +95,7 @@ const DashboardScreen = () => {
       }
       
       const gameId = await response.json();
-      router.push(`/game?gameId=${gameId}&color=${playerColor}&name=${username}&image=${imageUrl}&rating=${
+      router.push(`game?gameId=${gameId}&color=${playerColor}&name=${username}&image=${imageUrl}&rating=${
         mode === 'bullet' ? rating.bullet : (mode === 'blitz' ? rating.blitz : (mode === 'rapid' ? rating.rapid : rating.classical))}`);
     } catch (error) {
       console.error('Error creating new game: ' + error);
@@ -103,7 +103,7 @@ const DashboardScreen = () => {
   };
 
   const joinGame = (gameId: string) => {
-    router.push(`/game?gameId=${gameId}&color=${playerColor}&name=${username}&image=${imageUrl}&rating=${
+    router.push(`game?gameId=${gameId}&color=${playerColor}&name=${username}&image=${imageUrl}&rating=${
       mode === 'bullet' ? rating.bullet : (mode === 'blitz' ? rating.blitz : (mode === 'rapid' ? rating.rapid : rating.classical))}`);
   };
 
@@ -272,7 +272,7 @@ const DashboardScreen = () => {
 
           <Text style={styles.title}>ChessMate</Text>
 
-          <Link href="/profile">
+          <Link href="profile">
             <View style={styles.profileSection}>
               <Image source={{ uri: imageUrl }} style={styles.profile} />
               <Text style={styles.menuText}>{username}</Text>

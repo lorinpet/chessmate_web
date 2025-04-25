@@ -30,7 +30,7 @@ const RegisterScreen = () => {
 
         response.json().then((code) => {
             if (code.code === '0') {
-                router.push('/dashboard');
+                router.push('dashboard');
             }
         });
     }
@@ -168,7 +168,7 @@ const RegisterScreen = () => {
                     {serverCode === '1' ? 'Invalid credentials.' : (serverCode === '2' ? 'Username already taken.' : (serverCode === '3' ? 'Email already taken.' : 'Unknown error.'))}
                 </Text>}
 
-                <Link href="/login" style={styles.linkText}>
+                <Link href="login" style={styles.linkText}>
                     <Text style={styles.linkText}>Already have an account? Login.</Text>
                 </Link>
             </View>

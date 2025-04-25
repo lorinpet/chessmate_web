@@ -11,7 +11,7 @@ const NotFoundScreen = () => {
         <Text style={styles.title}>Oops! Page Not Found</Text>
         <Text style={styles.subtitle}>The page you're looking for doesn't exist or has been moved.</Text>
         
-        <Link href='/login' style={styles.button}>
+        <Link href='login' style={styles.button}>
           <Text style={styles.buttonText}>Go to Home</Text>
         </Link>
       </View>
