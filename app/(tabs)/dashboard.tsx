@@ -195,13 +195,15 @@ const DashboardScreen = () => {
                 data={activeGames}
                 keyExtractor={(item: any) => item.id}
                 renderItem={({ item }) => (
-                  <TouchableOpacity style={styles.gameItem} onPress={() => joinGame(item.id)}>
-                    <Text style={styles.gameText}>{item.opponent}</Text>
-                    <Text style={styles.gameText}>{item.rating}</Text>
-                    <Text style={styles.gameText}>{item.position}</Text>
-                    <Text style={styles.gameText}>{item.time}</Text>
-                    <Text style={styles.gameText}>{item.color}</Text>
-                  </TouchableOpacity>
+                  <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+                    <TouchableOpacity style={styles.gameItem} onPress={() => joinGame(item.id)}>
+                      <Text style={styles.gameText}>{item.opponent}</Text>
+                      <Text style={styles.gameText}>{item.rating}</Text>
+                      <Text style={styles.gameText}>{item.position}</Text>
+                      <Text style={styles.gameText}>{item.time}</Text>
+                      <Text style={styles.gameText}>{item.color}</Text>
+                    </TouchableOpacity>
+                  </ScrollView>
                 )}
                 ListEmptyComponent={
                   <Text style={styles.emptyText}>No games to join</Text>
@@ -505,7 +507,6 @@ const styles = StyleSheet.create({
   },
   gameItem: {
     flexDirection: 'row',
-    overflow: 'scroll',
     padding: 10,
     marginVertical: 5,
     backgroundColor: '#ccc',

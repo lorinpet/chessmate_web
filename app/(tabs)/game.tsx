@@ -2,7 +2,7 @@ import { View, Text, StyleSheet, useWindowDimensions, ScrollView, TouchableOpaci
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { Link, useRouter, useLocalSearchParams } from 'expo-router';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import Svg, { Rect } from 'react-native-svg';
 
 // Types for the chess pieces
@@ -384,7 +384,11 @@ const ChessBoard: React.FC<ChessBoardInterface> = ({ boardSize, boardState, onSq
   // Square rendering
   const renderSquares = () => {
     const squares = [];
-    const legalMoves = selectedPiece ? getLegalMoves(selectedPiece.row, selectedPiece.col, selectedPiece.piece, boardState, false, true, epFlags, castleFlags) : [];
+
+    const legalMoves = useMemo(() => {
+      if (!selectedPiece) return [];
+      return getLegalMoves(selectedPiece.row, selectedPiece.col, selectedPiece.piece, boardState, false, true, epFlags, castleFlags);
+    }, [selectedPiece, boardState, epFlags, castleFlags]);
 
     for (let row = 0; row < 8; row++) {
       for (let col = 0; col < 8; col++) {

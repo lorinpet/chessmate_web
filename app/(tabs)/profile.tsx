@@ -243,15 +243,17 @@ const ProfileScreen = () => {
           data={archivedGames}
           keyExtractor={(item: any) => item.id}
           renderItem={({ item }) => (
-            <TouchableOpacity style={styles.gameItem} onPress={() => {spectateGame(item.id)}}>
-              <Text style={styles.gameText}>{item.user}</Text>
-              <Text style={styles.gameText}>{item.rating}</Text>
-              <Text style={styles.gameText}>{item.color}</Text>
-              <Text style={styles.gameText}>{item.starting_position === 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1' ? 'Standard' : 'Custom'}</Text>
-              <Text style={styles.gameText}>{item.time_control}</Text>
-              <Text style={styles.gameText}>{item.result === 'white' ? 'White\u00A0won' : (item.result === 'black' ? 'Black\u00A0won' : 'Draw')}</Text>
-              <Text style={styles.gameText}>{item.completed_at.substring(0, 10).replace('-', '\u2011').replace('-', '\u2011')}</Text>
-            </TouchableOpacity>
+            <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+              <TouchableOpacity style={styles.gameItem} onPress={() => {spectateGame(item.id)}}>
+                <Text style={styles.gameText}>{item.user}</Text>
+                <Text style={styles.gameText}>{item.rating}</Text>
+                <Text style={styles.gameText}>{item.color}</Text>
+                <Text style={styles.gameText}>{item.starting_position === 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1' ? 'Standard' : 'Custom'}</Text>
+                <Text style={styles.gameText}>{item.time_control}</Text>
+                <Text style={styles.gameText}>{item.result === 'white' ? 'White\u00A0won' : (item.result === 'black' ? 'Black\u00A0won' : 'Draw')}</Text>
+                <Text style={styles.gameText}>{item.completed_at.substring(0, 10).replace('-', '\u2011').replace('-', '\u2011')}</Text>
+              </TouchableOpacity>
+            </ScrollView>
           )}
           ListEmptyComponent={ <Text style={styles.emptyText}>No games in the archive</Text> }
         />
@@ -342,7 +344,6 @@ const styles = StyleSheet.create({
   },
   gameItem: {
     flexDirection: 'row',
-    overflow: 'scroll',
     padding: 10,
     marginVertical: 5,
     backgroundColor: '#ccc',

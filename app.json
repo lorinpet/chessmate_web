@@ -1,11 +1,6 @@
 {
   "expo": {
     "slug": "chessmate",
-    "web": {
-      "bundler": "metro",
-      "output": "static",
-      "publicPath": "/chessmate_web/"
-    },
     "extra": {
       "eas": {
         "projectId": "3e5663d3-2d8b-4fff-b4db-40b41d1120f0"
@@ -16,6 +11,6 @@
     "android": {
       "package": "com.lorinpet.chessmate"
     },
-    "sdkVersion": "50.0.0"
+    "sdkVersion": "52.0.0"
   }
 }
