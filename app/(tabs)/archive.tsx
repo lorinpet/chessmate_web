@@ -128,7 +128,7 @@ const GameScreen: React.FC = () => {
   const archive = params.archive;
   const [validating, setValidating] = useState(true);
   const [archivedGame, setArchivedGame] = useState<{ game: any; whitePlayer: any; blackPlayer: any, moves: any[] } | null>(null);
-  const [analysis, setAnalysis] = useState('Press button to analyse');
+  const [analysis, setAnalysis] = useState({bestmove: 'Press button to analyse', evaluation: ''});
   const [analysing, setAnalysing] = useState(false);
   const [currMove, setCurrMove] = useState(-1);
   const [whiteUsername, setWhiteUsername] = useState('????');
@@ -288,7 +288,7 @@ const GameScreen: React.FC = () => {
 
   const handleStart = () => {
     if (currMove !== -1) {
-      setAnalysis('Press button to analyse');
+      setAnalysis({bestmove: 'Press button to analyse', evaluation: ''});
     }
 
     const fen = initialBoard;
@@ -298,7 +298,7 @@ const GameScreen: React.FC = () => {
 
   const handlePrev = () => {
     if (currMove !== -1) {
-      setAnalysis('Press button to analyse');
+      setAnalysis({bestmove: 'Press button to analyse', evaluation: ''});
       const fen = currMove - 1 !== -1 ? JSON.parse(archivedGame?.moves[currMove - 1].fen) : initialBoard;
       setCurrMove(Math.max(currMove - 1, -1));
       setBoardState(fen);
@@ -313,7 +313,7 @@ const GameScreen: React.FC = () => {
     }
 
     if (currMove !== index) {
-      setAnalysis('Press button to analyse');
+      setAnalysis({bestmove: 'Press button to analyse', evaluation: ''});
       const fen = JSON.parse(archivedGame?.moves[currMove + 1].fen);
       setCurrMove(Math.min(currMove + 1, index));
       setBoardState(fen);
@@ -328,7 +328,7 @@ const GameScreen: React.FC = () => {
     }
 
     if (currMove !== index) {
-      setAnalysis('Press button to analyse');
+      setAnalysis({bestmove: 'Press button to analyse', evaluation: ''});
     }
 
     const fen = JSON.parse(archivedGame?.moves[index].fen);
@@ -358,7 +358,13 @@ const GameScreen: React.FC = () => {
           </View>
 
           <View style={styles.topCenter}>
-            <Text style={[styles.analysisIndicator, { fontSize: responsiveFontSize(20) }]}>{analysis === 'bestmove (none)' ? 'No possible move' : analysis}</Text>
+            <Text style={[styles.analysisIndicator, { fontSize: responsiveFontSize(20) }]}>
+              {analysis.bestmove.trim() === 'bestmove (none)' ? 'No possible move' : analysis.bestmove.trim()}
+            </Text>
+
+            <Text style={[styles.analysisIndicator, { fontSize: responsiveFontSize(20) }]}>
+              {analysis.bestmove.trim() === 'bestmove (none)' ? '' : analysis.evaluation.trim()}
+            </Text>
           </View>
 
           <View style={styles.topRight}>

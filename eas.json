@@ -4,7 +4,12 @@
       "node": "18.18.0",
       "android": {
         "buildType": "apk",
-        "image": "ubuntu-22.04-jdk-17-ndk-r26b"
+        "image": "ubuntu-22.04-jdk-17-ndk-r21e",
+        "gradleCommand": ":app:assembleRelease",
+        "env": {
+          "EXPO_ANDROID_GRADLE_VERSION": "7.5.1",
+          "EXPO_ANDROID_GRADLE_PLUGIN_VERSION": "7.3.1"
+        }
       }
     }
   }

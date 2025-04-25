@@ -2,7 +2,6 @@
   "name": "chessmate",
   "main": "expo-router/entry",
   "version": "1.0.0",
-  "homepage": "https://lorinpet.github.io/chessmate_web",
   "scripts": {
     "start": "expo start",
     "reset-project": "node ./scripts/reset-project.js",
@@ -10,9 +9,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "test": "jest --watchAll",
-    "lint": "expo lint",
-    "predeploy": "expo export --platform web",
-    "deploy": "gh-pages -d dist"
+    "lint": "expo lint"
   },
   "jest": {
     "preset": "jest-expo"
@@ -45,8 +42,8 @@
     "i": "^0.3.7",
     "js-base64": "^3.7.7",
     "react": "18.3.1",
-    "react-dom": "18.2.0",
-    "react-native": "0.73.6",
+    "react-dom": "18.3.1",
+    "react-native": "0.76.7",
     "react-native-async-storage": "^0.0.1",
     "react-native-blob-util": "^0.21.2",
     "react-native-fs": "^2.20.0",
@@ -59,10 +56,9 @@
     "react-native-screens": "~4.4.0",
     "react-native-svg": "15.8.0",
     "react-native-vector-icons": "^10.2.0",
-    "react-native-web": "~0.19.6",
+    "react-native-web": "~0.19.13",
     "react-native-websocket": "^1.0.2",
     "react-native-webview": "13.12.5",
-    "react-scripts": "^5.0.1",
     "stockfish.js": "^10.0.2",
     "ws": "^8.18.1"
   },
@@ -73,7 +69,6 @@
     "@types/react-native": "^0.73.0",
     "@types/react-native-vector-icons": "^6.4.18",
     "@types/react-test-renderer": "^18.3.0",
-    "gh-pages": "^6.3.0",
     "jest": "^29.2.1",
     "jest-expo": "~52.0.6",
     "react-test-renderer": "18.3.1",

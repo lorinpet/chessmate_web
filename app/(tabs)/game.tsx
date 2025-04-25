@@ -372,7 +372,7 @@ const getLegalMoves = (row: number, col: number, piece: PieceKey, boardState: Bo
   return moves;
 };
 
-const ChessBoard: React.FC<ChessBoardInterface> = ({ boardSize, boardState, onSquarePress, selectedPiece, fliped, epFlags, castleFlags }) => {
+const ChessBoard: React.FC<ChessBoardInterface> = React.memo(({ boardSize, boardState, onSquarePress, selectedPiece, fliped, epFlags, castleFlags }) => {
   // Size of square
   const squareSize = boardSize / 8;
 
@@ -485,7 +485,7 @@ const ChessBoard: React.FC<ChessBoardInterface> = ({ boardSize, boardState, onSq
       {renderTouchableOverlay()}
     </View>
   );
-};
+});
 
 const PromotionMenu: React.FC<{
   isWhite: boolean;

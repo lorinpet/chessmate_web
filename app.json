@@ -11,6 +11,14 @@
     "android": {
       "package": "com.lorinpet.chessmate"
     },
-    "sdkVersion": "52.0.0"
+    "sdkVersion": "52.0.0",
+    "web": {
+      "bundler": "metro",
+      "output": "static",
+      "publicPath": "/chessmate_web/",
+      "router": {
+        "type": "hash"
+      }
+    }
   }
 }
