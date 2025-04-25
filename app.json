@@ -8,6 +8,7 @@
     },
     "name": "ChessMate",
     "icon": "cm.png",
+    "platforms": ["android", "web"],
     "android": {
       "package": "com.lorinpet.chessmate"
     },
