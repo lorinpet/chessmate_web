@@ -12,6 +12,7 @@ const LoginScreen = () => {
     const [isLoading, setIsLoading] = useState(false);
     const router = useRouter();
     const server = 'chessmate-production.up.railway.app';
+    console.log('Image URL:', `https://${server}/uploads/cm.png`);
 
     const verifyToken = async () => {
         let response;
