@@ -38,6 +38,7 @@ const DashboardScreen = () => {
 
     response.json().then((code) => {
       if (code.code === '1') {
+        setShowGameModal(false);
         router.push('login');
       }
     });
@@ -51,6 +52,7 @@ const DashboardScreen = () => {
 
   const logoff = async () => {
     await AsyncStorage.setItem('token', '');
+    setShowGameModal(false);
     router.push('login');
   }
 
@@ -95,6 +97,7 @@ const DashboardScreen = () => {
       }
       
       const gameId = await response.json();
+      setShowGameModal(false);
       router.push(`game?gameId=${gameId}&color=${playerColor}&name=${username}&image=${imageUrl}&rating=${
         mode === 'bullet' ? rating.bullet : (mode === 'blitz' ? rating.blitz : (mode === 'rapid' ? rating.rapid : rating.classical))}`);
     } catch (error) {
@@ -103,6 +106,7 @@ const DashboardScreen = () => {
   };
 
   const joinGame = (gameId: string) => {
+    setShowGameModal(false);
     router.push(`game?gameId=${gameId}&color=${playerColor}&name=${username}&image=${imageUrl}&rating=${
       mode === 'bullet' ? rating.bullet : (mode === 'blitz' ? rating.blitz : (mode === 'rapid' ? rating.rapid : rating.classical))}`);
   };

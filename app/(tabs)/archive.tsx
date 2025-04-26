@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, useWindowDimensions, ScrollView, TouchableOpacity, Image } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { Link, useRouter, useLocalSearchParams } from 'expo-router';
+import { MaterialIcons } from '@expo/vector-icons';
 import React, { useState, useEffect } from 'react';
 import Svg, { Rect } from 'react-native-svg';
 

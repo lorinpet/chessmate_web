@@ -1,6 +1,6 @@
 import { ScrollView, useWindowDimensions, StyleSheet, Text, View, TextInput, TouchableOpacity, Image } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Link, useRouter } from 'expo-router';
+import { Link, useRouter, usePathname } from 'expo-router';
 import { useState, useEffect } from 'react';
 
 const LoginScreen = () => {
@@ -11,6 +11,8 @@ const LoginScreen = () => {
     const [serverCode, setServerCode] = useState('0');
     const [isLoading, setIsLoading] = useState(false);
     const router = useRouter();
+    const pathname = usePathname();
+    console.log(pathname);
     const server = 'chessmate-production.up.railway.app';
 
     const verifyToken = async () => {

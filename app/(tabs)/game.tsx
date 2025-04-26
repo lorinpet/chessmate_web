@@ -1,8 +1,8 @@
 import { View, Text, StyleSheet, useWindowDimensions, ScrollView, TouchableOpacity, Image, TextInput } from 'react-native';
+import { Link, useRouter, useLocalSearchParams, useNavigation } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { Link, useRouter, useLocalSearchParams } from 'expo-router';
 import React, { useState, useEffect, useMemo } from 'react';
+import { MaterialIcons } from '@expo/vector-icons';
 import Svg, { Rect } from 'react-native-svg';
 
 // Types for the chess pieces
@@ -564,6 +564,7 @@ const GameScreen: React.FC = () => {
   const [chatInput, setChatInput] = useState('');
   const [isChatVisible, setIsChatVisible] = useState(false);
   const router = useRouter();
+  const navigation = useNavigation();
   
   const verifyToken = async () => {
     let response;
@@ -653,9 +654,14 @@ const GameScreen: React.FC = () => {
 
     setWs(websocket);
 
+    const unsubscribe = navigation.addListener('beforeRemove', () => {
+      websocket.close();
+    });
+
     // Cleanup on unmount
     return () => {
       websocket.close();
+      unsubscribe();
     };
   }, []);
 
