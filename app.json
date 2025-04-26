@@ -14,14 +14,16 @@
     },
     "sdkVersion": "52.0.0",
     "web": {
-      "bundler": "metro",
+      "bundler": "webpack",
       "output": "static",
+      "favicon": "cm.png",
       "publicPath": "/chessmate_web/",
       "build": {
         "assetPrefix": "/chessmate_web"
       },
       "router": {
-        "type": "hash"
+        "type": "hash",
+        "basePath": "/chessmate_web"
       }
     }
   }
