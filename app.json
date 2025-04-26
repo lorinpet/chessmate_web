@@ -14,6 +14,7 @@
     },
     "sdkVersion": "52.0.0",
     "web": {
+      "bundler": "metro",
       "output": "static",
       "publicPath": "/chessmate_web/",
       "build": {
