@@ -16,6 +16,9 @@
     "web": {
       "output": "static",
       "publicPath": "/chessmate_web/",
+      "build": {
+        "assetPrefix": "/chessmate_web"
+      },
       "router": {
         "type": "hash"
       }
