@@ -1,21 +1,32 @@
 {
   "files": {
-    "main.js": "/chessmate_web/static/js/main.ae9bc2a1.js",
-    "static/js/308.310fa05d.js": "/chessmate_web/static/js/308.310fa05d.js",
+    "main.js": "/chessmate_web/static/js/main.252e48bd.js",
+    "static/js/321.90487778.js": "/chessmate_web/static/js/321.90487778.js",
     "static/media/Ionicons.ttf": "/chessmate_web/static/media/Ionicons.9b6b1954a5eb6efeaf11.ttf",
     "static/media/MaterialIcons.ttf": "/chessmate_web/static/media/MaterialIcons.f20305dee9d396fea5c7.ttf",
     "favicon.ico": "/chessmate_web/favicon.ico",
     "static/media/unmatched.png": "/chessmate_web/static/media/unmatched.90215ee132a26d32b559.png",
+    "static/media/cm.png": "/chessmate_web/static/media/cm.dacadaa485e5f9dcb699.png",
     "index.html": "/chessmate_web/index.html",
+    "static/media/wq.png": "/chessmate_web/static/media/wq.56e72eee1943d5419265.png",
+    "static/media/wk.png": "/chessmate_web/static/media/wk.ec21e18f35a7dd2f60e5.png",
+    "static/media/wb.png": "/chessmate_web/static/media/wb.6d42acc96bfe407620d6.png",
+    "static/media/bq.png": "/chessmate_web/static/media/bq.8abb9b5abd07e9d46505.png",
+    "static/media/bk.png": "/chessmate_web/static/media/bk.e92e1bc2ca72894a8346.png",
+    "static/media/bb.png": "/chessmate_web/static/media/bb.e300f90faee37a91f211.png",
+    "static/media/wp.png": "/chessmate_web/static/media/wp.869f7c5cb2e7d6a80fce.png",
+    "static/media/wn.png": "/chessmate_web/static/media/wn.20e67b73f3fc6d040d67.png",
+    "static/media/bn.png": "/chessmate_web/static/media/bn.c74af2963d410b499722.png",
+    "static/media/bp.png": "/chessmate_web/static/media/bp.da9574b36b574994f5f4.png",
     "favicon-32.png": "/chessmate_web/favicon-32.png",
     "favicon-16.png": "/chessmate_web/favicon-16.png",
     "manifest.json": "/chessmate_web/manifest.json",
     "serve.json": "/chessmate_web/serve.json",
-    "main.ae9bc2a1.js.map": "/chessmate_web/static/js/main.ae9bc2a1.js.map",
-    "308.310fa05d.js.map": "/chessmate_web/static/js/308.310fa05d.js.map"
+    "main.252e48bd.js.map": "/chessmate_web/static/js/main.252e48bd.js.map",
+    "321.90487778.js.map": "/chessmate_web/static/js/321.90487778.js.map"
   },
   "entrypoints": [
-    "static/js/308.310fa05d.js",
-    "static/js/main.ae9bc2a1.js"
+    "static/js/321.90487778.js",
+    "static/js/main.252e48bd.js"
   ]
 }
