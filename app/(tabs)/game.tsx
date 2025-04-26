@@ -1,9 +1,8 @@
-import { View, Text, StyleSheet, useWindowDimensions, ScrollView, TouchableOpacity, Image, TextInput } from 'react-native';
+import { View, Text, StyleSheet, useWindowDimensions, ScrollView, TouchableOpacity, Image, TextInput, Pressable } from 'react-native';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Link, useRouter, useLocalSearchParams } from 'expo-router';
-import React, { useState, useEffect, useMemo } from 'react';
 import { MaterialIcons } from '@expo/vector-icons';
-import Svg, { Rect } from 'react-native-svg';
 
 // Types for the chess pieces
 type PieceKey = 'P' | 'N' | 'B' | 'R' | 'Q' | 'K' | 'p' | 'n' | 'b' | 'r' | 'q' | 'k';
@@ -14,18 +13,18 @@ const server = 'chessmate-production.up.railway.app';
 
 // Local PNG images for chess pieces
 const pieces: Record<PieceKey, any> = {
-  'P': 'https://' + server + '/uploads/wp.png',
-  'N': 'https://' + server + '/uploads/wn.png',
-  'B': 'https://' + server + '/uploads/wb.png',
-  'R': 'https://' + server + '/uploads/wr.png',
-  'Q': 'https://' + server + '/uploads/wq.png',
-  'K': 'https://' + server + '/uploads/wk.png',
-  'p': 'https://' + server + '/uploads/bp.png',
-  'n': 'https://' + server + '/uploads/bn.png',
-  'b': 'https://' + server + '/uploads/bb.png',
-  'r': 'https://' + server + '/uploads/br.png',
-  'q': 'https://' + server + '/uploads/bq.png',
-  'k': 'https://' + server + '/uploads/bk.png'
+  'P': require('../../pieces/wp.png'),
+  'N': require('../../pieces/wn.png'),
+  'B': require('../../pieces/wb.png'),
+  'R': require('../../pieces/wr.png'),
+  'Q': require('../../pieces/wq.png'),
+  'K': require('../../pieces/wk.png'),
+  'p': require('../../pieces/bp.png'),
+  'n': require('../../pieces/bn.png'),
+  'b': require('../../pieces/bb.png'),
+  'r': require('../../pieces/br.png'),
+  'q': require('../../pieces/bq.png'),
+  'k': require('../../pieces/bk.png')
 };
 
 // Piece types
@@ -372,117 +371,56 @@ const getLegalMoves = (row: number, col: number, piece: PieceKey, boardState: Bo
   return moves;
 };
 
-const ChessBoard: React.FC<ChessBoardInterface> = React.memo(({ boardSize, boardState, onSquarePress, selectedPiece, fliped, epFlags, castleFlags }) => {
-  // Size of square
+const ChessBoard = React.memo(({ boardState, boardSize, onSquarePress, selectedPiece, fliped, legalMoves, currentMoves }: any) => {
   const squareSize = boardSize / 8;
 
-  // Rotate board
   const rotateCoordinates = (row: number, col: number) => {
     return fliped ? { row: 7 - row, col: 7 - col } : { row, col };
   };
 
-  // Square rendering
-  const renderSquares = () => {
-    const squares = [];
-
-    const legalMoves = useMemo(() => {
-      if (!selectedPiece) return [];
-      return getLegalMoves(selectedPiece.row, selectedPiece.col, selectedPiece.piece, boardState, false, true, epFlags, castleFlags);
-    }, [selectedPiece, boardState, epFlags, castleFlags]);
-
-    for (let row = 0; row < 8; row++) {
-      for (let col = 0; col < 8; col++) {
-        const { row: displayRow, col: displayCol } = rotateCoordinates(row, col);
-        const x = displayCol * squareSize;
-        const y = displayRow * squareSize;
-        const color = (row + col) % 2 === 0 ? '#c3c2c2' : '#504d55';
-        const startColor = (row + col) % 2 === 0 ? '#fc8' : '#fc4';
-        const targetColor = (row + col) % 2 === 0 ? '#c00' : '#800';
-        const isLegalMove = legalMoves.some(move => move.row === row && move.col === col);
-
-        squares.push(
-          <Rect
-            key={`square-${row}-${col}`}
-            x={x}
-            y={y}
-            width={squareSize}
-            height={squareSize}
-            fill={isLegalMove ? targetColor : ((epFlags.start && epFlags.start.row === row && epFlags.start.col === col ||
-              epFlags.target && epFlags.target.row === row && epFlags.target.col === col ||
-              selectedPiece && selectedPiece.row === row && selectedPiece.col === col) ? startColor : color)}
-          />
-        );
-      }
-    }
-
-    return squares;
-  };
-
-  // Piece rendering
-  const renderPieces = () => {
-    const pieceComponents = [];
-
-    for (let row = 0; row < 8; row++) {
-      for (let col = 0; col < 8; col++) {
-        const piece = boardState[row][col];
-
-        if (piece) {
-          const { row: displayRow, col: displayCol } = rotateCoordinates(row, col);
-          const x = displayCol * squareSize;
-          const y = displayRow * squareSize;
-
-          pieceComponents.push(
-            <Image
-              key={`piece-${row}-${col}`}
-              source={{ uri: pieces[piece] }}
-              style={{ position: 'absolute', left: x, top: y, width: squareSize, height: squareSize}}
-            />
-          );
-        }
-      }
-    }
-
-    return pieceComponents;
-  };
-
-  // Touchable overlay rendering
-  const renderTouchableOverlay = () => {
-    const touchables = [];
-
-    for (let row = 0; row < 8; row++) {
-      for (let col = 0; col < 8; col++) {
-        const { row: displayRow, col: displayCol } = rotateCoordinates(row, col);
-        const x = displayCol * squareSize;
-        const y = displayRow * squareSize;
-
-        touchables.push(
-          <TouchableOpacity
-            key={`touchable-${row}-${col}`}
-            style={{
-              position: 'absolute',
-              left: x,
-              top: y,
-              width: squareSize,
-              height: squareSize,
-            }}
-            onPress={() => onSquarePress(row, col)}
-          />
-        );
-      }
-    }
-
-    return touchables;
-  };
-
   return (
     <View style={{ width: boardSize, height: boardSize }}>
-      <Svg width={boardSize} height={boardSize}>
-        {renderSquares()}
-      </Svg>
+      {boardState.map((rowArray, row) =>
+        rowArray.map((piece, col) => {
+          const { row: displayRow, col: displayCol } = rotateCoordinates(row, col);
+          const isSelected = selectedPiece && selectedPiece.row === row && selectedPiece.col === col;
+          const isCurrent = (currentMoves.start && currentMoves.start.row === row && currentMoves.start.col === col ||
+            currentMoves.target && currentMoves.target.row === row && currentMoves.target.col === col);
+          const isLegal = legalMoves.some(m => m.row === row && m.col === col);
+          let backgroundColor;
 
-      {renderPieces()}
+          if ((row + col) % 2 === 0) {
+            backgroundColor = isLegal ? '#c00' : (isSelected || isCurrent) ? '#fc8' : '#c3c2c2';
+          } else {
+            backgroundColor = isLegal ? '#800' : (isSelected || isCurrent) ? '#fc4' : '#504d55';
+          }
 
-      {renderTouchableOverlay()}
+          return (
+            <Pressable
+              key={`${row}-${col}`}
+              onPress={() => onSquarePress(row, col)}
+              style={{
+                position: 'absolute',
+                left: displayCol * squareSize,
+                top: displayRow * squareSize,
+                width: squareSize,
+                height: squareSize,
+                backgroundColor,
+                justifyContent: 'center',
+                alignItems: 'center'
+              }}
+            >
+              {piece && (
+                <Image
+                  source={pieces[piece]}
+                  style={{ width: squareSize, height: squareSize }}
+                  resizeMode="contain"
+                />
+              )}
+            </Pressable>
+          );
+        })
+      )}
     </View>
   );
 });
@@ -516,7 +454,7 @@ const PromotionMenu: React.FC<{
           onPress={() => onSelect(piece)}
         >
           <Image
-            source={{ uri: pieces[piece] }}
+            source={pieces[piece]}
             style={{ width: squareSize, height: squareSize }}
           />
         </TouchableOpacity>
@@ -659,14 +597,12 @@ const GameScreen: React.FC = () => {
     };
   }, []);
 
-  const handleMove = (from: { row: number; col: number }, to: { row: number; col: number }, promotion: PieceKey | null) => {
-    if (ws) {
-      // Send the move to the server
-      ws.send(JSON.stringify({ type: 'move', from, to, promotion }));
-    }
-  };
+  const legalMoves = useMemo(() => {
+    if (!selectedPiece) return [];
+    return getLegalMoves(selectedPiece.row, selectedPiece.col, selectedPiece.piece, boardState, false, true, epFlags, castleFlags);
+  }, [selectedPiece]);
 
-  const handleSquarePress = (row: number, col: number) => {
+  const onSquarePress = useCallback((row, col) => {
     if (whiteUsername === '????' || blackUsername === '????') {
       return;
     }
@@ -691,7 +627,7 @@ const GameScreen: React.FC = () => {
       } else {
         const promotionRow = isWhiteTurn ? 0 : 7;
 
-        if (selectedPiece.piece.toLowerCase() === 'p' && row === promotionRow) {
+        if (selectedPiece.piece.toLowerCase() === 'p' && row === promotionRow && legalMoves.some(m => m.row === row && m.col === col)) {
           setPromotionSquare({ row, col });
 
           return;
@@ -702,6 +638,13 @@ const GameScreen: React.FC = () => {
       }
     } else if (piece && ((color === 'white' && isWhiteTurn && whiteKeys.includes(piece)) || (color === 'black' && !isWhiteTurn && blackKeys.includes(piece)))) {
       setSelectedPiece({ row, col, piece });
+    }
+  }, [boardState, selectedPiece, isWhiteTurn, promotionSquare, result, isChatVisible]);
+
+  const handleMove = (from: { row: number; col: number }, to: { row: number; col: number }, promotion: PieceKey | null) => {
+    if (ws) {
+      // Send the move to the server
+      ws.send(JSON.stringify({ type: 'move', from, to, promotion }));
     }
   };
 
@@ -724,7 +667,7 @@ const GameScreen: React.FC = () => {
         {capturedPieces.map((piece, index) => (
           <Image
             key={`captured-${piece}-${index}`}
-            source={{ uri: pieces[piece] }}
+            source={pieces[piece]}
             style={[{ width: pieceWidth, height: pieceHeight }]}
           />
         ))}
@@ -840,13 +783,13 @@ const GameScreen: React.FC = () => {
 
           <View>
             <ChessBoard
-              boardSize={boardSize}
               boardState={boardState}
-              onSquarePress={handleSquarePress}
+              boardSize={boardSize}
+              onSquarePress={onSquarePress}
               selectedPiece={selectedPiece}
               fliped={fliped}
-              epFlags={epFlags}
-              castleFlags={castleFlags}
+              legalMoves={legalMoves}
+              currentMoves={epFlags}
             />
 
             {promotionSquare && (

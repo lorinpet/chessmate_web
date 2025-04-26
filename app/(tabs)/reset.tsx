@@ -96,7 +96,7 @@ const ResetPasswordScreen = () => {
         <ScrollView>
             <View style={[styles.container, { minHeight: useWindowDimensions().height }]}>
                 <Text style={styles.title}>ChessMate</Text>
-                <Image source={{ uri: 'https://' + server + '/uploads/cm.png' }} style={styles.profileImage} />
+                <Image source={require('../../pieces/cm.png')} style={styles.profileImage} />
 
                 <Text style={styles.success}>
                     Please enter the code we've sent on given email address.

@@ -16,18 +16,18 @@ const server = 'chessmate-production.up.railway.app';
 
 // Local PNG images for chess pieces
 const pieces: Record<PieceKey, any> = {
-  'P': 'https://' + server + '/uploads/wp.png',
-  'N': 'https://' + server + '/uploads/wn.png',
-  'B': 'https://' + server + '/uploads/wb.png',
-  'R': 'https://' + server + '/uploads/wr.png',
-  'Q': 'https://' + server + '/uploads/wq.png',
-  'K': 'https://' + server + '/uploads/wk.png',
-  'p': 'https://' + server + '/uploads/bp.png',
-  'n': 'https://' + server + '/uploads/bn.png',
-  'b': 'https://' + server + '/uploads/bb.png',
-  'r': 'https://' + server + '/uploads/br.png',
-  'q': 'https://' + server + '/uploads/bq.png',
-  'k': 'https://' + server + '/uploads/bk.png'
+  'P': require('../../pieces/wp.png'),
+  'N': require('../../pieces/wn.png'),
+  'B': require('../../pieces/wb.png'),
+  'R': require('../../pieces/wr.png'),
+  'Q': require('../../pieces/wq.png'),
+  'K': require('../../pieces/wk.png'),
+  'p': require('../../pieces/bp.png'),
+  'n': require('../../pieces/bn.png'),
+  'b': require('../../pieces/bb.png'),
+  'r': require('../../pieces/br.png'),
+  'q': require('../../pieces/bq.png'),
+  'k': require('../../pieces/bk.png')
 };
 
 // Initial board setup
@@ -101,7 +101,7 @@ const ChessBoard: React.FC<ChessBoardInterface> = ({ boardSize, boardState, flip
           pieceComponents.push(
             <Image
               key={`piece-${row}-${col}`}
-              source={{ uri: pieces[piece] }}
+              source={pieces[piece]}
               style={{ position: 'absolute', left: x, top: y, width: squareSize, height: squareSize}}
             />
           );

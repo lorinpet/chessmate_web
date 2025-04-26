@@ -10,6 +10,7 @@ const DashboardScreen = () => {
   const [imageUrl, setImageUrl] = useState('');
   const [rating, setRating] = useState({bullet: 0, blitz: 0, rapid: 0, classical: 0});
   const [showGameModal, setShowGameModal] = useState(false);
+  const [isCreating, setIsCreating] = useState(false);
   const [time, setTime] = useState('');
   const [mode, setMode] = useState('');
   const [activeGames, setActiveGames] = useState([]);
@@ -84,6 +85,8 @@ const DashboardScreen = () => {
 
   const createNewGame = async () => {
     try {
+      setIsCreating(true);
+
       const response = await fetch('https://' + server + '/create', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -98,6 +101,7 @@ const DashboardScreen = () => {
       
       const gameId = await response.json();
       setShowGameModal(false);
+      setIsCreating(false);
       router.push(`game?gameId=${gameId}&color=${playerColor}&name=${username}&image=${imageUrl}&rating=${
         mode === 'bullet' ? rating.bullet : (mode === 'blitz' ? rating.blitz : (mode === 'rapid' ? rating.rapid : rating.classical))}`);
     } catch (error) {
@@ -238,7 +242,7 @@ const DashboardScreen = () => {
                 style={styles.createButton}
                 onPress={createNewGame}
               >
-                <Text style={styles.buttonText}>Create a game</Text>
+                <Text style={styles.buttonText}>{isCreating ? 'Creating...' : 'Create a game'}</Text>
               </TouchableOpacity>
 
               <TouchableOpacity 

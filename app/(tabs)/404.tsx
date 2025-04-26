@@ -1,13 +1,11 @@
 import { ScrollView, useWindowDimensions, View, Text, StyleSheet, Image } from 'react-native';
 import { Link } from 'expo-router';
 
-const server = 'chessmate-production.up.railway.app';
-
 const NotFoundScreen = () => {
   return (
     <ScrollView>
       <View style={[styles.container, { minHeight: useWindowDimensions().height }]}>
-        <Image source={{ uri: 'https://' + server + '/uploads/cm.png' }} style={styles.image} resizeMode="contain"/>
+        <Image source={require('../../pieces/cm.png')} style={styles.image} resizeMode="contain"/>
         <Text style={styles.title}>Oops! Page Not Found</Text>
         <Text style={styles.subtitle}>The page you're looking for doesn't exist or has been moved.</Text>
         

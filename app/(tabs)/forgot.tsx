@@ -75,7 +75,7 @@ const ForgotPasswordScreen = () => {
         <ScrollView>
             <View style={[styles.container, { minHeight: useWindowDimensions().height }]}>
                 <Text style={styles.title}>ChessMate</Text>
-                <Image source={{ uri: 'https://' + server + '/uploads/cm.png' }} style={styles.profileImage} />
+                <Image source={require('../../pieces/cm.png')} style={styles.profileImage} />
 
                 <TextInput
                     style={styles.input}
