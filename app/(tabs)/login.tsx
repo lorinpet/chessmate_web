@@ -12,7 +12,6 @@ const LoginScreen = () => {
     const [isLoading, setIsLoading] = useState(false);
     const router = useRouter();
     const pathname = usePathname();
-    console.log(pathname);
     const server = 'chessmate-production.up.railway.app';
 
     const verifyToken = async () => {
@@ -31,6 +30,8 @@ const LoginScreen = () => {
         response.json().then((code) => {
             if (code.code === '0') {
                 router.push('dashboard');
+            } else if (pathname === '/chessmate_web') {
+                router.push('login');
             }
         });
     }
