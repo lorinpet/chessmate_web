@@ -11,7 +11,7 @@
     "web": "expo start --web",
     "test": "jest --watchAll",
     "lint": "expo lint",
-    "web:build": "expo export --platform web",
+    "web:build": "expo export --platform web --asset-prefix=/chessmate_web",
     "deploy": "gh-pages -d dist"
   },
   "jest": {
