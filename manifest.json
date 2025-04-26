@@ -1,0 +1,15 @@
+{
+  "display": "standalone",
+  "lang": "en",
+  "name": "ChessMate",
+  "short_name": "ChessMate",
+  "start_url": "/?utm_source=web_app_manifest",
+  "related_applications": [
+    {
+      "platform": "play",
+      "url": "http://play.google.com/store/apps/details?id=com.lorinpet.chessmate",
+      "id": "com.lorinpet.chessmate"
+    }
+  ],
+  "prefer_related_applications": true
+}
