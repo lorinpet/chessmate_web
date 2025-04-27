@@ -1,8 +1,9 @@
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, useWindowDimensions, Image, Modal, FlatList } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, useWindowDimensions, Image, Modal, FlatList, Platform } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Slider from '@react-native-community/slider';
 import { Link, useRouter } from 'expo-router';
 import { useState, useEffect } from 'react';
+import * as Updates from 'expo-updates';
 
 const DashboardScreen = () => {
   const [validating, setValidating] = useState(true);
@@ -40,7 +41,7 @@ const DashboardScreen = () => {
     response.json().then((code) => {
       if (code.code === '1') {
         setShowGameModal(false);
-        router.push('login');
+        resetApp();
       }
     });
   }
@@ -51,10 +52,18 @@ const DashboardScreen = () => {
     }
   }, []);
 
+  const resetApp = async () => {
+    if (Platform.OS === 'web') {
+      window.location.href = 'https://lorinpet.github.io/chessmate_web';
+    } else {
+      await Updates.reloadAsync();
+    }
+  }
+
   const logoff = async () => {
-    await AsyncStorage.setItem('token', '');
+    await AsyncStorage.clear();
     setShowGameModal(false);
-    router.push('login');
+    resetApp();
   }
 
   const fetchData = async () => {
@@ -96,6 +105,7 @@ const DashboardScreen = () => {
       
       if (!response.ok) {
         setInvalid(true);
+        setIsCreating(false);
         return;
       }
       
@@ -225,7 +235,7 @@ const DashboardScreen = () => {
                   step={1}
                   value={difficulty}
                   onValueChange={setDifficulty}
-                  minimumTrackTintColor='#00f'
+                  minimumTrackTintColor='#08f'
                   maximumTrackTintColor='#888'
                 />
 
@@ -414,7 +424,7 @@ const styles = StyleSheet.create({
   },
   menuText: {
     color: '#fff',
-    fontSize: 16
+    fontSize: 18
   },
   sectionTitle: {
     fontSize: 18,
@@ -440,7 +450,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   modeText: {
-    fontSize: 16,
+    fontSize: 18,
     color: '#fff'
   },
   modeLabel: {
@@ -472,17 +482,17 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     padding: 16,
     color: '#fff',
-    fontSize: 16
+    fontSize: 18
   },
   warning: {
     width: '80%',
     color: '#f00',
     marginBottom: 10,
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: 'bold'
   },
   fenLabel: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: 'bold',
     color: '#fff',
     textAlign: 'center',
@@ -490,7 +500,7 @@ const styles = StyleSheet.create({
     marginBottom: 10
   },
   sectionHeader: {
-    fontSize: 16,
+    fontSize: 18,
     color: '#fff',
     marginTop: 15,
     marginBottom: 10
@@ -508,7 +518,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   selectedOption: {
-    backgroundColor: '#00f'
+    backgroundColor: '#08f'
   },
   optionText: {
     color: '#fff'
@@ -541,7 +551,7 @@ const styles = StyleSheet.create({
   createButton: {
     flex: 1,
     padding: 10,
-    backgroundColor: '#00f',
+    backgroundColor: '#08f',
     borderRadius: 5,
     marginRight: 10,
     alignItems: 'center'
@@ -560,7 +570,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#fff',
     marginTop: 8,
-    fontSize: 16
+    fontSize: 18
   }
 });
 

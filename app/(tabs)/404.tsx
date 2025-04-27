@@ -39,14 +39,14 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   subtitle: {
-    fontSize: 16,
+    fontSize: 18,
     color: '#ccc',
     textAlign: 'center',
     marginBottom: 30,
     paddingHorizontal: 20
   },
   button: {
-    backgroundColor: '#00f',
+    backgroundColor: '#08f',
     paddingVertical: 12,
     paddingHorizontal: 30,
     borderRadius: 25,
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: '#fff',
-    fontSize: 16
+    fontSize: 18
   }
 });
 

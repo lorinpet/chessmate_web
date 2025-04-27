@@ -170,13 +170,13 @@ const styles = StyleSheet.create({
         borderRadius: 2,
         paddingHorizontal: 15,
         marginBottom: 5,
-        fontSize: 16
+        fontSize: 18
     },
     warning: {
         width: '80%',
         color: '#f00',
         marginBottom: 10,
-        fontSize: 16,
+        fontSize: 18,
         fontWeight: 'bold'
     },
     button: {
@@ -189,13 +189,13 @@ const styles = StyleSheet.create({
         marginBottom: 5
     },
     buttonText: {
-        color: '#00f',
+        color: '#08f',
         fontSize: 18,
         fontWeight: 'bold'
     },
     linkText: {
-        color: '#00f',
-        fontSize: 14,
+        color: '#08f',
+        fontSize: 18,
         fontWeight: 'bold',
         marginVertical: 10
     }

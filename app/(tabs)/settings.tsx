@@ -1,9 +1,10 @@
-import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, TextInput } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, TextInput, Platform } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as ImagePicker from 'expo-image-picker';
 import { Ionicons } from '@expo/vector-icons';
 import { Link, useRouter } from 'expo-router';
 import { useState, useEffect } from 'react';
+import * as Updates from 'expo-updates';
 
 const SettingsScreen = () => {
   const [validating, setValidating] = useState(true);
@@ -32,7 +33,7 @@ const SettingsScreen = () => {
 
     response.json().then((code) => {
       if (code.code === '1') {
-        router.push('login');
+        resetApp();
       }
     });
   }
@@ -42,6 +43,14 @@ const SettingsScreen = () => {
       verifyToken();
     }
   }, []);
+
+  const resetApp = async () => {
+    if (Platform.OS === 'web') {
+      window.location.href = 'https://lorinpet.github.io/chessmate_web';
+    } else {
+      await Updates.reloadAsync();
+    }
+  }
 
   const fetchData = async () => {
     let tokenString = await AsyncStorage.getItem('token');
@@ -212,7 +221,7 @@ const styles = StyleSheet.create({
     marginBottom: 20
   },
   label: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: 'bold',
     color: '#fff',
     textAlign: 'center',
@@ -223,13 +232,13 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     padding: 16,
     color: '#fff',
-    fontSize: 16
+    fontSize: 18
   },
   warning: {
     width: '80%',
     color: '#f00',
     marginBottom: 10,
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: 'bold'
   },
   saveButton: {
@@ -240,7 +249,7 @@ const styles = StyleSheet.create({
   },
   saveButtonText: {
     color: '#fff',
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: 'bold'
   }
 });

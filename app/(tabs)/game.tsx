@@ -1,8 +1,9 @@
-import { View, Text, StyleSheet, useWindowDimensions, ScrollView, TouchableOpacity, Image, TextInput, Pressable } from 'react-native';
+import { View, Text, StyleSheet, useWindowDimensions, ScrollView, TouchableOpacity, Image, TextInput, Pressable, Platform } from 'react-native';
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Link, useRouter, useLocalSearchParams } from 'expo-router';
 import { MaterialIcons } from '@expo/vector-icons';
+import * as Updates from 'expo-updates';
 
 // Types for the chess pieces
 type PieceKey = 'P' | 'N' | 'B' | 'R' | 'Q' | 'K' | 'p' | 'n' | 'b' | 'r' | 'q' | 'k';
@@ -518,7 +519,7 @@ const GameScreen: React.FC = () => {
 
     response.json().then((code) => {
       if (code.code === '1') {
-        router.push('login');
+        resetApp();
       }
     });
   }
@@ -528,6 +529,14 @@ const GameScreen: React.FC = () => {
       verifyToken();
     }
   }, []);
+
+  const resetApp = async () => {
+    if (Platform.OS === 'web') {
+      window.location.href = 'https://lorinpet.github.io/chessmate_web';
+    } else {
+      await Updates.reloadAsync();
+    }
+  }
 
   const setImage = async (url: string, white: boolean) => {
     const imageResponse = await fetch(url)
