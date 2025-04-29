@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "/chessmate_web/static/js/main.2bc1616b.js",
+    "main.js": "/chessmate_web/static/js/main.e45af569.js",
     "static/js/321.90487778.js": "/chessmate_web/static/js/321.90487778.js",
     "static/media/Ionicons.ttf": "/chessmate_web/static/media/Ionicons.9b6b1954a5eb6efeaf11.ttf",
     "static/media/MaterialIcons.ttf": "/chessmate_web/static/media/MaterialIcons.f20305dee9d396fea5c7.ttf",
@@ -22,11 +22,11 @@
     "favicon-16.png": "/chessmate_web/favicon-16.png",
     "manifest.json": "/chessmate_web/manifest.json",
     "serve.json": "/chessmate_web/serve.json",
-    "main.2bc1616b.js.map": "/chessmate_web/static/js/main.2bc1616b.js.map",
+    "main.e45af569.js.map": "/chessmate_web/static/js/main.e45af569.js.map",
     "321.90487778.js.map": "/chessmate_web/static/js/321.90487778.js.map"
   },
   "entrypoints": [
     "static/js/321.90487778.js",
-    "static/js/main.2bc1616b.js"
+    "static/js/main.e45af569.js"
   ]
 }
