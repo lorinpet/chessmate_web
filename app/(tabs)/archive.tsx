@@ -146,7 +146,6 @@ const GameScreen: React.FC = () => {
   const [fen, setFen] = useState('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1');
   const [boardState, setBoardState] = useState<BoardState>(initialBoard);
   const [fliped, setFlip] = useState<boolean>(false);
-  const router = useRouter();
 
   const verifyToken = async () => {
     let response;

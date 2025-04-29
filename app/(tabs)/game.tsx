@@ -498,11 +498,11 @@ const GameScreen: React.FC = () => {
   const [ws, setWs] = useState<WebSocket | null>(null);
   const [whiteTimer, setWhiteTimer] = useState(0);
   const [blackTimer, setBlackTimer] = useState(0);
+  const [drawOffered, setDrawOffered] = useState(false);
   const [result, setResult] = useState('ongoing');
   const [chatMessages, setChatMessages] = useState<string[]>([]);
   const [chatInput, setChatInput] = useState('');
   const [isChatVisible, setIsChatVisible] = useState(false);
-  const router = useRouter();
   
   const verifyToken = async () => {
     let response;
@@ -583,10 +583,13 @@ const GameScreen: React.FC = () => {
         if (data.gameState.winner) {
           setPromotionSquare(null);
           setSelectedPiece(null);
+          setDrawOffered(false);
           setResult(data.gameState.winner);
         }
       } else if (data.type === 'chat') {
         setChatMessages((prevMessages) => [...prevMessages, data.message]);
+      } else if (data.type === 'draw') {
+        setDrawOffered(true);
       }
     };
 
@@ -867,7 +870,7 @@ const GameScreen: React.FC = () => {
         <View style={styles.buttonContainer}>
           <TouchableOpacity onPress={handleOfferDraw} style={[styles.button, { width: buttonWidth }]}>
             <MaterialIcons name="handshake" size={responsiveFontSize(30)} color="#fff" />
-            <Text style={[styles.buttonText, { fontSize: responsiveFontSize(14) }]}>Offer Draw</Text>
+            <Text style={[styles.buttonText, { fontSize: responsiveFontSize(14) }]}>{drawOffered ? "Accept Draw" : "Offer Draw"}</Text>
           </TouchableOpacity>
 
           <TouchableOpacity onPress={handleResign} style={[styles.button, { width: buttonWidth }]}>

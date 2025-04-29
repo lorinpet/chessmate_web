@@ -15,7 +15,6 @@ const SettingsScreen = () => {
   const [profileImage, setProfileImage]: any = useState('');
   const [serverCode, setServerCode] = useState('0');
   const [isLoading, setIsLoading] = useState(false);
-  const router = useRouter();
   const server = 'chessmate-production.up.railway.app';
   
   const verifyToken = async () => {
